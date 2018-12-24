@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/vue.js"></script>
+</head>
+<style>
+    .divclass {
+        color: red;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <div v-on:click="hanclick" v-bind:class="{divclass:isClass}" v-bind:style="styleObj">{{massg}}</div>
+        <span v-if="show">{{massg}}</span><br/>
+        <span v-show="show">{{massg}}</span>
+        <ul>
+            <li v-for="(iemt,index) in list">{{iemt}}--{{index}}</li>
+        </ul>
+        <ul>
+            <li v-for="(iemt,index) in userInfo">{{iemt}}--{{index}}</li>
+        </ul>
+    </div>
+    <script>
+        //push pop shift unshift splice sort reverse
+        var app = new Vue({
+            el: "#app",
+            data: {
+                massg: "Hello word",
+                isClass: false,
+                show: false,
+                styleObj: {
+                    "font-size": "2px"
+                },
+                userInfo: {
+                    name: "Dell",
+                    age: 28,
+                    gender: "mala",
+                    salary: "secret"
+                },
+                list: [
+                    "a",
+                    "b",
+                    "c"
+                ]
+            },
+            methods: {
+                hanclick: function() {
+                    this.isClass = !this.isClass;
+                    this.styleObj['font-size'] = "15px";
+                    this.show = !this.show;
+                    this.list.splice(0, 1, "d");
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

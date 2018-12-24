@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>vue生命周期</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+    <script src='js/vue.js'></script>
+</head>
+
+<body>
+    <div id="app">{{maht}}</div>
+</body>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            name: "Holle vue",
+            age: "18",
+            maht: "Holle  vue"
+        },
+        // computed: {
+        //     maht: function() {
+        //         return this.name + this.age;
+        //     }
+        // }
+        // watch: {
+        //     name: function(val) {
+        //         this.maht = val + "" + this.age;
+        //     },
+        //     age: function(val) {
+        //         this.maht = val + "" + this.name;
+        //     }
+        // }
+        computed: {
+            maht: {
+                get: function() {
+                    return this.name + '' + this.age;
+                },
+                set: function(newValue) {
+                    var names = newValue.split(' ')
+                    this.name = names[0]
+                    this.age = names[names.length - 1]
+                }
+            }
+        }
+    })
+</script>
+
+</html>

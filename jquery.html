@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>vue</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/jquery-3.3.1.min.js"></script>
+</head>
+
+<body>
+    <!-- <div id="app">{{name}}
+    </div> -->
+    <div id="app">
+        <input id='input' type="text">
+        <button id="but">提交</button>
+        <ul id="ultolist"></ul>
+    </div>
+    <script>
+        function Parnt() {}
+        $.extend(Parnt.prototype, {
+            init: function() {
+                this.bindonclick();
+            },
+            bindonclick: function() {
+                var but = $("#but");
+                but.on("click", $.proxy(this.handleBtnClick, this));
+            },
+            handleBtnClick: function() {
+                var ultolist = $("#ultolist");
+                var invlue = $("#input").val();
+                ultolist.append("<li>" + invlue + "</li>");
+                $("#input").val('');
+            }
+        })
+        var parnt = new Parnt();
+        parnt.init();
+    </script>
+</body>
+
+</html>

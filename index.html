@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>vue</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <!-- <div id="app">{{name}}
+    </div> -->
+    <div id="app">
+        <input v-model="inputValue" type="text">
+        <button v-on:click="handleBtnClick">提交</button>
+        <ul>
+            <!-- <li v-for="item in list">{{item}}</li> -->
+            <todo-item v-bind:content="item" v-bind:index="index" v-for="(item,index) in list" @dedelet="handleItemClick">
+            </todo-item>
+        </ul>
+    </div>
+    <script>
+        // Vue.component("TodoItem", {
+        //     props: ["content"],
+        //     template: "<li>{{content}}<li>"
+        // })
+        var TodoItem = {
+            props: ["content", "index"],
+            template: "<li @click='handleItemClick'>{{content}}<li>",
+            methods: {
+                handleItemClick: function() {
+                    this.$emit("dedelet", this.index);
+                }
+            }
+        };
+        var app = new Vue({
+                el: "#app",
+                components: {
+                    TodoItem: TodoItem
+                },
+                data: {
+                    inputValue: "",
+                    list: [],
+                    name: "Holle vue"
+                },
+                methods: {
+                    handleBtnClick: function() {
+                        // var list1 = app.$data.list;
+                        // list1.push(app.$data.inputValue);
+                        // app.$data.list = list1;
+                        // app.$data.inputValue = "";
+                        this.list.push(this.inputValue);
+                        this.inputValue = '';
+                    },
+                    handleItemClick: function(index) {
+                        this.list.splice(index, 1);
+                    }
+                }
+            })
+            // setInterval(function() {
+            //     app.$data.name = "holle  onm";
+            // }, 4000);
+    </script>
+</body>
+
+</html>
