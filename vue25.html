@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <child content="Dell"></child>
+        <child content="Lee"></child>
+    </div>
+</body>
+<script>
+    Vue.component('child', {
+        data: function() {
+            return {
+                selfContent: this.content
+            }
+        },
+        props: {
+            content: String
+        },
+        template: "<div @click='handleClick'>{{selfContent}}</div>",
+        methods: {
+            handleClick: function() {
+                console.log(new Vue(), app);
+                app.$emit('change', this.selfContent);
+            }
+        },
+        mounted: function() {
+            var thta = this;
+            app.property.$on('change', function(msg) {
+                thta.selfContent = msg
+            })
+        }
+    })
+    var app = new Vue({
+        el: "#app",
+        data: {
+
+        }
+    })
+</script>
+
+
+</html>
